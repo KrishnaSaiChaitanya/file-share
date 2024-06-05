@@ -35,30 +35,31 @@ fileInput.onchange = (e) => {
 
       outputSection.classList.add("active");
     });
-}
+};
 
 emailForm.addEventListener("submit", (e) => {
-
   e.preventDefault();
 
-  fetch('/api/file/send', {
-    method: 'POST',
+  fetch("/api/file/send", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      uuid: linkText.value.split('/').splice(-1, 1)[0],
+      uuid: linkText.value.split("/").splice(-1, 1)[0],
       emailTo: receiverInput.value,
-      emailFrom: senderInput.value
-    })
+      emailFrom: senderInput.value,
+    }),
   })
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
       if (data.success) {
         alert(data.message);
       }
-    }).catch(err => {
+    })
+    .catch((err) => {
       console.log(err);
-      alert("Unable to send email right now");
+      // alert("Unable to send email right now");
     });
-}); 
+});
